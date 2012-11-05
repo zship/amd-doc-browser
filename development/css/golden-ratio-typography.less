@@ -1,0 +1,80 @@
+/*
+
+ Golden ratio typography mixins, based on these articles:
+ http://www.pearsonified.com/2011/12/golden-ratio-typography.php
+ http://www.pearsonified.com/2012/01/characters-per-line.php
+
+*/
+
+
+@phi: 1.618;
+
+
+@mu-american-typewriter: 2.12;
+@mu-baskerville: 2.51;
+@mu-georgia: 2.27;
+@mu-hoefler-text: 2.44;
+@mu-palatino-linotype: 2.30;
+@mu-times-new-roman: 2.60;
+@mu-arial: 2.31;
+@mu-gill-sans: 2.51;
+@mu-helvetica: 2.26;
+@mu-lucida-grande: 2.07;
+@mu-tahoma: 2.30;
+@mu-trebuchet: 2.22;
+@mu-verdana: 1.98;
+@mu-courier: 1.60;
+
+// google web fonts
+@mu-open-sans: 1.89;
+@mu-droid-sans: 2.13;
+
+
+.golden-auto(@size, @mu: 2.25, @cpl: 70, @tracking: 0) {
+	@letter-spacing-em: @tracking / 1000em;
+	@width: @cpl * (@size / @mu);
+	//line-height should increase with tracking. tracking != 0 will change the
+	//'mu' value. calculate line-height based on a mu adjusted for tracking.
+	@adjusted-mu: (@cpl * (@size + @size * @letter-spacing-em)) / (@width + (@width * @letter-spacing-em));
+	@adjusted-width: @cpl * ((@size + (@size * @letter-spacing-em)) / @adjusted-mu);
+
+	font-size: @size;
+	letter-spacing: @letter-spacing-em;
+	max-width: round(@width);
+	/*@width-em: @width / @size;*/
+	/*width: ~`parseFloat("@{width-em}").toFixed(2) + "em"`;*/
+	.golden-lineheight(@size, @adjusted-width);
+}
+
+//same as .golden-auto, but adjust margins for the new line-height
+.golden-auto-margin(@size, @mu: 2.25, @cpl: 70, @tracking: 0) {
+	@letter-spacing-em: @tracking / 1000em;
+	@width: @cpl * (@size / @mu);
+	@adjusted-mu: (@cpl * (@size + @size * @letter-spacing-em)) / (@width + (@width * @letter-spacing-em));
+	@adjusted-width: @cpl * ((@size + (@size * @letter-spacing-em)) / @adjusted-mu);
+
+	font-size: @size;
+	letter-spacing: @letter-spacing-em;
+	max-width: round(@width);
+
+	@squared: (@size * @phi) * (@size * @phi);
+	@lh: @phi - (1 / (2 * @phi)) * (1 - @adjusted-width / (@squared));
+	line-height: ~`parseFloat("@{lh}").toFixed(2)`;
+
+	margin-top: ~`parseFloat("@{lh}").toFixed(2) + "em"`;
+	margin-bottom: ~`parseFloat("@{lh}").toFixed(2) + "em"`;
+}
+
+
+.golden-lineheight(@size, @width) {
+	@squared: (@size * @phi) * (@size * @phi);
+	@lh: @phi - (1 / (2 * @phi)) * (1 - @width / (@squared));
+	line-height: ~`parseFloat("@{lh}").toFixed(2)`;
+}
+
+
+.golden-width(@size, @lineheight) {
+	@squared: (@size * @phi) * (@size * @phi);
+	@width: @squared * (1 + (2 * @phi) * (@lineheight - @phi));
+	width: round(@width);
+}

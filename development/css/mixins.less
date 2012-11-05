@@ -1,0 +1,106 @@
+.inline-block() {
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+}
+
+.border-radius(@radius: 5px) {
+	border-radius: @radius;
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-khtml-border-radius: @radius;
+	-moz-background-clip: padding; 
+	-webkit-background-clip: padding-box; 
+	background-clip: padding-box;
+}
+
+.border-radius2(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+	-webkit-border-top-right-radius: @topright;
+	-webkit-border-bottom-right-radius: @bottomright;
+	-webkit-border-bottom-left-radius: @bottomleft;
+	-webkit-border-top-left-radius: @topleft;
+	-moz-border-radius-topright: @topright;
+	-moz-border-radius-bottomright: @bottomright;
+	-moz-border-radius-bottomleft: @bottomleft;
+	-moz-border-radius-topleft: @topleft;
+	border-top-right-radius: @topright;
+	border-bottom-right-radius: @bottomright;
+	border-bottom-left-radius: @bottomleft;
+	border-top-left-radius: @topleft;
+	-moz-background-clip: padding; 
+	-webkit-background-clip: padding-box; 
+	background-clip: padding-box;
+}
+
+.box-shadow(@x, @y, @blur, @spread, @color) {
+	-webkit-box-shadow: @x @y @blur @spread @color;
+	-moz-box-shadow: @x @y @blur @spread @color;
+	box-shadow: @x @y @blur @spread @color;
+}
+
+.opacity(@op: 1)
+{
+	@msop: @op * 100;
+	filter: alpha(opacity=@msop);
+	-moz-opacity: @op;
+	-khtml-opacity: @op;
+	opacity: @op;
+}
+
+.drop-shadow(@x-axis: 0, @y-axis: 1px, @blur: 2px, @alpha: 0.1) {
+	-webkit-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+	-moz-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+	box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+}
+
+.transition-duration(@duration: 0.2s) {
+	-moz-transition-duration: @duration;
+	-webkit-transition-duration: @duration;
+	transition-duration: @duration;
+}
+
+.transition(@first, @second: replaceme) {
+	//less hack to allow multiple comma-separated transition values 
+	//this works because all browsers use the same syntax for transitions currently
+	@properties: ~`'@{arguments}'.replace(/^\[|\]$/g, '').replace(/, replaceme/g, '')`;
+	-webkit-transition: @properties;
+	-moz-transition: @properties;
+	-o-transition: @properties;
+	transition: @properties;
+}
+
+.wrap(@orient:horizontal, @align:stretch, @direction:normal, @pack:start) {
+	display:-webkit-box; display:-moz-box; display:box;
+
+	-webkit-box-orient:@orient; 
+	-moz-box-orient:@orient;
+	box-orient:@orient;
+
+	-webkit-box-align:@align;
+	-moz-box-align:@align;
+	box-align:@align;
+
+	-webkit-box-direction:@direction;
+	-moz-box-direction:@direction;
+	box-direction:@direction;
+
+	-webkit-box-pack:@pack;
+	-moz-box-pack:@pack;
+	box-pack:@pack;
+}
+
+.box(@flex:0, @ordinal:1) {
+	-webkit-box-flex:@flex;
+	-moz-box-flex:@flex;
+	box-flex:@flex;
+
+	-webkit-box-ordinal-group:@ordinal;
+	-moz-box-ordinal-group:@ordinal;
+	box-ordinal-group:@ordinal;
+}
+
+.box-sizing(@size) {
+	-webkit-box-sizing: @size;
+	-moz-box-sizing: @size;
+	box-sizing: @size;
+}
