@@ -75,6 +75,10 @@ html, body {
 			font-size: inherit;
 			font-weight: normal;
 		}
+
+		a.active {
+			color: #F0DFAF;
+		}
 	}
 }
 
@@ -106,7 +110,6 @@ html, body {
 	bottom: 0;
 	width: @taglist-width;
 	padding: @gutter;
-	/*background-color: lighten(@background, 2%);*/
 	background-color: darken(@background, 2%);
 	border-right: @section-border-size solid @section-border-color;
 
@@ -130,6 +133,7 @@ html, body {
 			display: block;
 			list-style-type: none;
 		}
+
 	}
 
 	h3 {
@@ -138,7 +142,14 @@ html, body {
 
 		a {
 			color: darken(#ffffff, 25%);
+			text-decoration: none;
 		}
+	}
+
+	.highlight,
+	.highlight a,
+	{
+		color: #F0DFAF;
 	}
 }
 
@@ -148,87 +159,138 @@ html, body {
 	left: @modules-outer-width + @taglist-outer-width;
 	right: 0;
 	bottom: 0;
-	padding: @gutter;
+	padding: 0 @gutter;
 
 	overflow: auto;
 
+
 	p, ul {
-		.golden-auto-margin(@font-size, @mu-open-sans, 70, 50);
+		.golden-auto(@font-size, @mu-open-sans, 70, 50);
+		margin: @gutter 0;
 	}
 
-	& > div:nth-child(odd) {
-		background-color: lighten(@background, 3%);
+	h2, h3 {
+		margin: @gutter 0;
 	}
 
-	& > div:nth-child(even) {
-		background-color: @background;
+	code {
+		letter-spacing: 0;
+		background: #3F3F3F;
+		margin: 2px 0;
+		padding: 0 3px;
+		.border-radius(3px);
+		border: 1px solid lighten(#3f3f3f, 10%);
 	}
 
-	& > div {
+	pre {
+		width: 600px;
+		padding: @gutter;
+		margin: @gutter 0;
+		background: #3F3F3F;
+		border: 1px solid lighten(#3f3f3f, 10%);
+		.border-radius(3px);
+
+		& > code {
+			border: 0 none;
+			padding: 0;
+		}
+
+	}
+
+
+	.section {
 		margin-left: -1 * @gutter;
 		margin-right: -1 * @gutter;
-		padding: @gutter;
-		padding-bottom: 20px;
-		/*border-top: 1px solid @section-border-color;*/
+		padding: 0 @gutter;
 
-		& > h3 {
+		.section-header {
 			margin-top: 0;
+			margin-bottom: 0;
+			margin-left: -1 * @gutter;
+			margin-right: -1 * @gutter;
+			padding: @gutter;
 			color: darken(#ffffff, 25%);
+			background: lighten(@background, 7%);
 		}
 	}
 
-	& > div:first-child {
-		margin-top: -1 * @gutter;
-		border: 0 none;
-	}
 
-	.constructor, .method, .property {
+	.subsection
+	{
+		@hover-color: #F0DFAF;
+
 		position: relative;
-		margin-top: 3em;
+		margin: 0 (-1 * @gutter);
+		padding: 1px @gutter - 5px;
+		border-width: 0 5px;
+		border-color: transparent;
+		border-style: solid;
 
-		.permalink, .srclink {
+
+		&:nth-child(odd) {
+			background-color: @background;
+		}
+
+		&:nth-child(even) {
+			background-color: lighten(@background, 3%);
+		}
+
+
+		.meta {
 			display: block;
 			position: absolute;
-			top: -5px;
-			width: 23px;
-			height: 23px;
-			line-height: 23px;
+			top: @gutter / 2;
+			right: 0;
+			width: 48px;
+			text-align: right;
 
-			padding: 5px;
-			.border-radius(5px);
+			.permalink, .srclink {
+				display: block;
 
-			text-align: center;
-			text-decoration: none;
-			font-size: 18px;
-			color: darken(#ffffff, 20%);
-			background: #3F3F3F;
-			border: 1px solid lighten(#3f3f3f, 10%);
+				width: 23px;
+				height: 23px;
+				line-height: 23px;
 
-			.opacity(0);
+				padding: 5px 15px 5px 10px;
+				.border-radius(5px 0 0 5px);
 
-			&.showing {
+				text-align: center;
+				vertical-align: top;
+				text-decoration: none;
+				color: @hover-color;
+
+				.opacity(0);
+
+				&:hover {
+					background: @hover-color;
+					color: @background;
+				}
+
+				i {
+					position: relative;
+				}
+			}
+
+			.permalink {
+				font-size: 18px;
+			}
+
+			.srclink {
+				font-size: 23px;
+			}
+		}
+
+
+		&.highlight,
+		&:hover
+		{
+			border-color: @hover-color;
+
+			.permalink, .srclink {
 				.opacity(1);
 			}
-
-			&:hover {
-				border-color: lighten(#3f3f3f, 20%);
-				background: lighten(#3f3f3f, 5%);
-				color: darken(#ffffff, 5%);
-			}
-
-			i {
-				position: relative;
-				top: 2px;
-			}
 		}
 
-		.permalink {
-			left: 500px;
-		}
-
-		.srclink {
-			left: 540px;
-		}
 	}
 
 
@@ -266,32 +328,13 @@ html, body {
 }
 
 
-code {
-	letter-spacing: 0;
-	background: #3F3F3F;
-	margin: 2px 0;
-	padding: 0 3px;
-	.border-radius(3px);
-	border: 1px solid lighten(#3f3f3f, 10%);
-}
-
-pre {
-	width: 600px;
-	padding: @gutter;
-	background: #3F3F3F;
-	border: 1px solid lighten(#3f3f3f, 10%);
-	.border-radius(3px);
-
-	& > code {
-		border: 0 none;
-		padding: 0;
-	}
-
-}
 
 a {
-	color: rgba(187, 187, 255, 0.9);
+	/*color: saturate(#8CD0D3, 30%);*/
+	color: #8cd0d3;
+	/*color: rgba(187, 187, 255, 0.9);*/
 	text-decoration: none;
+	font-weight: 600;
 
 	&:hover {
 		text-decoration: underline;

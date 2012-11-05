@@ -4,6 +4,7 @@ define(function(require) {
 	var declare = require('dojo/_base/declare');
 	var Controller = require('joss/mvc/Controller');
 	var isNumber = require('amd-utils/lang/isNumber');
+	var hub = require('dojo/topic');
 	require('joss/geometry/DomRect');
 
 
@@ -12,6 +13,7 @@ define(function(require) {
 
 		start: function() {
 			this._currentModule = null;
+			this._highlighted = null;
 		},
 
 
@@ -25,6 +27,38 @@ define(function(require) {
 		},
 
 
+		highlight: function(member) {
+			if (this._highlighted) {
+				this._highlighted.removeClass('highlight');
+			}
+
+			if (!member) {
+				return;
+			}
+
+			var anchor = this.$root.find('[rel="' + member + '"]');
+			if (!anchor.is('.subsection')) {
+				anchor = anchor.parent().find('.subsection').first();
+			}
+			anchor.addClass('highlight');
+			this._highlighted = anchor;
+		},
+
+
+		'section:highlight': function(name, sender) {
+			if (sender === this) {
+				return;
+			}
+
+			if (!name) {
+				this.highlight(null);
+				return;
+			}
+
+			this.highlight(name);
+		},
+
+
 		scrollTo: function(el) {
 			if (isNumber(el)) {
 				this.$root.scrollTop(el);
@@ -32,23 +66,17 @@ define(function(require) {
 			}
 
 			var scroll = this.$root.offset().top - el.offset().top;
-			this.$root.scrollTop(-1 * scroll + this.$root.scrollTop() - 20);
+			this.$root.scrollTop(-1 * scroll + this.$root.scrollTop());
 		},
 
 
-		'.constructor, .property, .method mouseenter': function(ev, tgt) {
-			var srclink = $(tgt).find('.srclink');
-			var permalink = $(tgt).find('.permalink');
-			srclink.addClass('showing');
-			permalink.addClass('showing');
-		},
-
-
-		'.constructor, .property, .method mouseleave': function(ev, tgt) {
-			var srclink = $(tgt).find('.srclink');
-			var permalink = $(tgt).find('.permalink');
-			srclink.removeClass('showing');
-			permalink.removeClass('showing');
+		'.subsection mouseenter': function(ev, tgt) {
+			this.highlight(null);
+			var member = $(tgt).attr('rel');
+			if (!member) {
+				member = $(tgt).parent().find('[rel]').attr('rel');
+			}
+			hub.publish('section:highlight', member, this);
 		},
 
 
@@ -66,6 +94,7 @@ define(function(require) {
 		'docload:property': function(parts) {
 			if (parts.module === this._currentModule) {
 				var anchor = this.$root.find('[rel="/#' + parts.longName + '"]');
+				this.highlight('/#' + parts.longName);
 				this.scrollTo(anchor);
 				return;
 			}

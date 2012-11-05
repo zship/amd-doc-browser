@@ -14,7 +14,8 @@
 	background-clip: padding-box;
 }
 
-.border-radius2(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+/* border-radius shorthand: https://developer.mozilla.org/en-US/docs/CSS/border-radius */
+.border-radius-sides(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
 	-webkit-border-top-right-radius: @topright;
 	-webkit-border-bottom-right-radius: @bottomright;
 	-webkit-border-bottom-left-radius: @bottomleft;
