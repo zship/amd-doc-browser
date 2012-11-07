@@ -9,6 +9,10 @@ define(function(require) {
 	return declare(Router, {
 
 		'*': function(fragment) {
+			if (!fragment) {
+				return;
+			}
+
 			if (fragment.search(/#/g) === -1) {
 				hub.publish('docload:module', fragment.replace(/^\//, ''));
 			}
