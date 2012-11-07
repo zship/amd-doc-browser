@@ -81,6 +81,8 @@ define(function(require) {
 
 
 		'docload:module': function(name) {
+			this.$root.removeClass('initial');
+
 			if (name === this._currentModule) {
 				this.scrollTo(0);
 				return;
@@ -92,6 +94,8 @@ define(function(require) {
 
 
 		'docload:property': function(parts) {
+			this.$root.removeClass('initial');
+
 			if (parts.module === this._currentModule) {
 				var anchor = this.$root.find('[rel="/#' + parts.longName + '"]');
 				this.highlight('/#' + parts.longName);

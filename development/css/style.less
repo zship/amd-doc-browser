@@ -75,16 +75,17 @@ html, body {
 			font-size: inherit;
 			font-weight: normal;
 		}
+	}
 
-		a.active {
-			color: #F0DFAF;
-		}
+	.highlight
+	{
+		color: #F0DFAF;
 	}
 }
 
 
 @header-outer-height: 55px;
-@header-height: @header-outer-height - (10px * 2) - @section-border-size;
+@header-height: @header-outer-height - (10px * 2);
 #header {
 	position: absolute;
 	top: 0;
@@ -93,7 +94,7 @@ html, body {
 	height: @header-height;
 	padding: 10px 0 10px @gutter;
 	background-color: darken(@background, 2%);
-	border-bottom: @section-border-size solid @section-border-color;
+	/*border-bottom: @section-border-size solid @section-border-color;*/
 
 	h2 {
 		margin: 0;
@@ -102,7 +103,7 @@ html, body {
 
 
 @taglist-width: 200px;
-@taglist-outer-width: @taglist-width + @gutter * 2 + @section-border-size;
+@taglist-outer-width: @taglist-width + @gutter * 2;
 #taglist {
 	position: absolute;
 	top: @header-outer-height - 1;
@@ -111,7 +112,7 @@ html, body {
 	width: @taglist-width;
 	padding: @gutter;
 	background-color: darken(@background, 2%);
-	border-right: @section-border-size solid @section-border-color;
+	/*border-right: @section-border-size solid @section-border-color;*/
 
 	overflow: auto;
 
@@ -160,6 +161,17 @@ html, body {
 	right: 0;
 	bottom: 0;
 	padding: 0 @gutter;
+	border-top: @section-border-size solid @section-border-color;
+	border-left: @section-border-size solid @section-border-color;
+	background-color: @background;
+
+	.transition(top 0.7s ease, left 0.7s ease);
+
+	&.initial {
+		top: 0;
+		left: @modules-outer-width;
+		border-left: 0px none;
+	}
 
 	overflow: auto;
 
