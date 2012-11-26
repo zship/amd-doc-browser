@@ -13,12 +13,12 @@ define(function(require) {
 				return;
 			}
 
-			if (fragment.search(/#/g) === -1) {
+			if (fragment.search(/[#~\.]/g) === -1) {
 				hub.publish('docload:module', fragment.replace(/^\//, ''));
 			}
 			else {
 				var matches;
-				if ((matches = fragment.match(/^\/(.*?)#(.*)$/)) !== null) {
+				if ((matches = fragment.match(/^\/(.*?)[#~\.](.*)$/)) !== null) {
 					hub.publish('docload:property', {
 						longName: matches[0],
 						module: matches[1],

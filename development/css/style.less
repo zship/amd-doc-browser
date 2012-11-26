@@ -247,6 +247,22 @@ html, body {
 			background-color: lighten(@background, 3%);
 		}
 
+		h4.getter {
+			margin-bottom: 0.2em;
+		}
+
+		h4.setter {
+			margin-top: 0.2em;
+		}
+
+		.scope, .accessor {
+			color: fadeout(@font-color, 30%);
+		}
+
+		.accessor {
+			.inline-block();
+			width: 31px;
+		}
 
 		.meta {
 			display: block;
@@ -312,6 +328,10 @@ html, body {
 		}
 
 		& > .paren:last-child {
+			padding-left: 5px;
+		}
+
+		.param + .opt {
 			padding-left: 5px;
 		}
 
