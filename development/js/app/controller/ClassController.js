@@ -5,6 +5,7 @@ define(function(require) {
 	var Controller = require('joss/mvc/Controller');
 	var isNumber = require('amd-utils/lang/isNumber');
 	var hub = require('dojo/topic');
+	var Url = require('dojo/_base/url');
 	require('joss/geometry/DomRect');
 
 
@@ -14,6 +15,7 @@ define(function(require) {
 		start: function() {
 			this._currentModule = null;
 			this._highlighted = null;
+			console.log(this.$root.data('events'));
 		},
 
 
@@ -24,6 +26,42 @@ define(function(require) {
 			}).done(function(response) {
 				this.contents(response);
 			}.bind(this));
+		},
+
+
+		'a mouseenter': function(ev, tgt) {
+			if ($(tgt).is('.srclink')) {
+				return false;
+			}
+
+			var url = new Url(tgt.href);
+			if (url.host === window.location.host) {
+				return false;
+			}
+
+			$('#extlink')
+				.show()
+				.css({
+					'font-size': $(tgt).css('font-size'),
+					'background-color': $(tgt).closest('.subsection').css('background-color')
+				})
+				.rect()
+				.position({
+					my: 'bottom',
+					at: 'top',
+					of: $(tgt).rect()
+				})
+				.apply();
+		},
+
+
+		'a mouseleave': function() {
+			$('#extlink').hide();
+		},
+
+
+		'{root} scroll': function() {
+			$('#extlink').hide();
 		},
 
 
@@ -89,7 +127,9 @@ define(function(require) {
 			}
 
 			this._currentModule = name;
-			this.load(name);
+			this.load(name).then(function() {
+				this.scrollTo(0);
+			}.bind(this));
 		},
 
 

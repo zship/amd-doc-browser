@@ -388,7 +388,7 @@ html, body {
 			.subsection-header {
 				color: @hover-color;
 
-				a, .opt, .or, .sep {
+				span, a, .opt, .or, .sep {
 					color: @hover-color;
 				}
 			}
@@ -495,4 +495,17 @@ a {
 	&:hover {
 		text-decoration: underline;
 	}
+}
+
+
+#extlink {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-align: center;
+	color: #8cd0d3;
+	line-height: 1em;
+	padding: 1px 3px;
+	.border-radius(5px);
 }
