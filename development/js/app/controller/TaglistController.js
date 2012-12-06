@@ -21,7 +21,8 @@ define(function(require) {
 				method: 'GET'
 			}).done(function(response) {
 				this.contents(response);
-				$('#header h2').text(moduleName);
+				var moduleInfo = this.$root.find('h2:first').html();
+				$('#header h2').html(moduleInfo);
 			}.bind(this));
 		},
 

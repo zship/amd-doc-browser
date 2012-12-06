@@ -93,11 +93,20 @@ html, body {
 	right: 0;
 	height: @header-height;
 	padding: 10px 0 10px @gutter;
-	background-color: darken(@background, 2%);
+	background-color: darken(@background, 1%);
 	/*border-bottom: @section-border-size solid @section-border-color;*/
 
 	h2 {
 		margin: 0;
+	}
+
+	.extends {
+		font-size: 0.8em;
+		color: fadeout(@font-color, 30%);
+
+		.sep {
+			padding-right: 5px;
+		}
 	}
 }
 
@@ -112,7 +121,7 @@ html, body {
 	width: @taglist-width;
 	padding: @gutter;
 	padding-top: 0;
-	background-color: darken(@background, 2%);
+	background-color: darken(@background, 1%);
 	/*border-right: @section-border-size solid @section-border-color;*/
 
 	overflow: auto;
@@ -300,56 +309,28 @@ html, body {
 		.override-info
 		{
 			position: absolute;
-			top: 60px;
+			/*top: 75px;*/
+			top: 1px;
 			right: @gutter;
 			color: fadeout(@font-color, 20%);
-		}
 
-/*
- *        .meta {
- *            display: block;
- *            position: absolute;
- *            top: @gutter / 2;
- *            right: 0;
- *            width: 48px;
- *            text-align: right;
- *
- *            .permalink, .srclink {
- *                display: block;
- *
- *                width: 23px;
- *                height: 23px;
- *                line-height: 23px;
- *
- *                padding: 5px 15px 5px 10px;
- *                .border-radius(5px 0 0 5px);
- *
- *                text-align: center;
- *                vertical-align: top;
- *                text-decoration: none;
- *                color: @hover-color;
- *
- *                .opacity(0);
- *
- *                &:hover {
- *                    background: @hover-color;
- *                    color: @background;
- *                }
- *
- *                i {
- *                    position: relative;
- *                }
- *            }
- *
- *            .permalink {
- *                font-size: 18px;
- *            }
- *
- *            .srclink {
- *                font-size: 23px;
- *            }
- *        }
- */
+			//mirror the dimensions of adjacent h4 and description, to
+			//perfectly align vertically
+			span, a {
+				display: inline-block;
+				.golden-auto(@font-size, @mu-open-sans, 70, 50);
+				margin: @gutter 0;
+			}
+
+			&::before {
+				visibility: hidden;
+				content: 'align';
+				display: block;
+				font-size: 118%;
+				font-weight: 600;
+				margin-top: 1.33em;
+			}
+		}
 
 		.meta {
 			position: absolute;
@@ -409,26 +390,26 @@ html, body {
 
 
 	.params {
-		& > .paren:first-child {
-			padding-right: 5px;
+		display: inline-block;
+		padding: 0 5px;
+
+		.param {
+			display: inline-block;
 		}
 
-		& > .paren:last-child {
+		.name + .opt {
 			padding-left: 5px;
 		}
 
-		.param + .opt {
-			padding-left: 5px;
-		}
-
-		.opt, .or {
+		.opt, .or, .generic {
 			color: darken(@font-color, 40%);
 		}
 
 		.or {
-			margin: 0 -2px;
+			margin: 0 -1px;
 			font-size: 20px;
 			font-weight: 400;
+			line-height: 0.1em; //avoid affecting parent height
 		}
 		
 		.opt {
@@ -436,6 +417,11 @@ html, body {
 			top: 1px;
 			font-size: 23px;
 			font-weight: 300;
+			line-height: 0.1em; //avoid affecting parent height
+		}
+
+		.generic {
+			font-weight: 400;
 		}
 
 		.sep {
