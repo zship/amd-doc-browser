@@ -39,7 +39,8 @@ define(function(require) {
 				return false;
 			}
 
-			$('#extlink')
+			var tgtRect = $(tgt).rect();
+			var rect = $('#extlink')
 				.show()
 				.css({
 					'font-size': $(tgt).css('font-size'),
@@ -49,9 +50,14 @@ define(function(require) {
 				.position({
 					my: 'bottom',
 					at: 'top',
-					of: $(tgt).rect()
-				})
-				.apply();
+					of: tgtRect
+				});
+
+			if ($(tgt).parent().parent().is('.inherit-info, .override-info, .import-info')) {
+				rect.moveLeft(tgtRect.left);
+			}
+
+			rect.apply();
 		},
 
 
@@ -75,9 +81,11 @@ define(function(require) {
 			}
 
 			var anchor = this.$root.find('[rel="' + member + '"]');
-			if (!anchor.is('.subsection')) {
-				anchor = anchor.parent().find('.subsection').first();
-			}
+			/*
+			 *if (!anchor.is('.subsection')) {
+			 *    anchor = anchor.parent().find('.subsection').first();
+			 *}
+			 */
 			anchor.addClass('highlight');
 			this._highlighted = anchor;
 		},
@@ -105,6 +113,12 @@ define(function(require) {
 
 			var scroll = this.$root.offset().top - el.offset().top;
 			this.$root.scrollTop(-1 * scroll + this.$root.scrollTop());
+		},
+
+
+		'.section-header mouseenter': function(ev, tgt) {
+			var member = $(tgt).attr('rel');
+			hub.publish('section:highlight', member, this);
 		},
 
 

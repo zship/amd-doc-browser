@@ -31,7 +31,7 @@ define(function(require) {
 				return;
 			}
 
-			var anchor = this.$root.find('[href="' + module + '#SOverview"]');
+			var anchor = this.$root.find('[href="' + module + '"]');
 			anchor.addClass('highlight');
 			this._highlighted = anchor;
 		},

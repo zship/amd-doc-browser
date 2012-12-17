@@ -1,0 +1,303 @@
+body.dark {
+	@font-color: rgba(255,255,255,0.9);
+	@highlight-color: #F0DFAF;
+	@background: #2f2f2f;
+	@section-border-color: #777;
+
+	color: @font-color;
+	background-color: @background;
+
+	#modules {
+		background-color: lighten(@background, 3%);
+		border-color: @section-border-color;
+
+		.highlight,
+		.highlight a {
+			color: #F0DFAF;
+		}
+	}
+
+	#header, #taglist {
+		background-color: darken(@background, 1%);
+
+		h3, h3 a {
+			color: darken(#ffffff, 25%);
+		}
+
+		.extends {
+			color: fadeout(@font-color, 30%);
+		}
+
+		.highlight,
+		.highlight a {
+			color: #F0DFAF;
+		}
+	}
+
+	#main {
+		background-color: @background;
+		border-color: @section-border-color;
+
+		code, pre {
+			background: #3F3F3F;
+			border-color: lighten(#3f3f3f, 10%);
+		}
+
+		.section {
+			background: lighten(@background, 8%);
+
+			.section-header {
+				color: fadeout(@font-color, 30%);
+				border-color: @background;
+				text-shadow: 1px 1px 1px @background;
+
+				&.highlight {
+					color: #F0DFAF;
+				}
+			}
+		}
+
+		.subsection {
+			&:nth-child(odd) {
+				background-color: @background;
+			}
+
+			&:nth-child(even) {
+				background-color: lighten(@background, 3%);
+			}
+
+			.scope, .chainable, .accessor {
+				color: fadeout(@font-color, 30%);
+			}
+
+			.inherit-info,
+			.override-info,
+			.import-info
+			{
+				color: fadeout(@font-color, 20%);
+			}
+
+			.permalink, .srclink {
+				color: fadeout(@font-color, 30%);
+
+				&:hover {
+					color: fadein(@font-color, 10%);
+				}
+			}
+
+			.params {
+				.opt, .or, .generic, .varargs {
+					color: darken(@font-color, 40%);
+				}
+			}
+
+			&.highlight {
+				.subsection-header {
+					color: @highlight-color;
+
+					span, a, .opt, .or, .sep {
+						color: @highlight-color;
+					}
+				}
+
+				.permalink, .srclink {
+					color: @highlight-color;
+				}
+			}
+		}
+	}
+
+	strong {
+		color: fadein(@font-color, 10%);
+	}
+
+	a {
+		color: #8cd0d3;
+	}
+
+	#extlink {
+		color: #8cd0d3;
+	}
+
+	::-webkit-scrollbar {
+		width: 12px;
+		background: transparent;
+		border-width: 1px 0 0 1px;
+		border-style: solid;
+		border-color: @section-border-color;
+	}
+
+	::-webkit-scrollbar-track { 
+		background-color: rgba(255,255,255,0.1);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: @section-border-color;
+		border-color: @section-border-color;
+		margin: 0 -1px;
+		width: 14px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		/*background-color: rgba(140, 208, 211, 0.5);*/
+		background-color: #668889;
+	}
+
+}
+
+
+
+
+body.light {
+	@background: #fdf6e3;
+	@font-color: #657b83;
+
+	@emphasized: #586e75;
+	@primary: #657b83;
+	@secondary: #93a1a1;
+
+	@highlight: #cb4b16;
+
+	@bg2: #eee8d5;
+	@section-border-color: darken(@bg2, 8%);
+
+	color: @font-color;
+	background-color: @background;
+
+	#modules {
+		background-color: @background;
+		border-color: @section-border-color;
+
+		.highlight,
+		.highlight a {
+			color: @highlight;
+		}
+	}
+
+	#header, #taglist {
+		background-color: lighten(@background, 3%);
+
+		h2 {
+			color: @emphasized;
+		}
+
+		h3, h3 a {
+			color: @primary;
+		}
+
+		.extends {
+			color: @secondary;
+		}
+
+		.highlight,
+		.highlight a {
+			color: @highlight;
+		}
+	}
+
+	#main {
+		background-color: @background;
+		border-color: @section-border-color;
+
+		code, pre {
+			background: #fdf6e3;
+			border-color: @section-border-color;
+		}
+
+		.section {
+			.section-header {
+				color: @emphasized;
+				text-shadow: 1px 1px 0 #fff;
+				background: @bg2;
+				border-color: #fff;
+			}
+		}
+
+		.subsection {
+			.subsection-header {
+				color: @emphasized;
+			}
+
+			&:nth-child(odd) {
+				background-color: #FBF4E0; //fadeout(@bg2, 90%) with @background behind
+			}
+
+			&:nth-child(even) {
+				background-color: #F5EFDB; //fadeout(@bg2, 50%) with @background behind
+			}
+
+			.scope, .chainable, .accessor {
+				color: @secondary;
+			}
+
+			.inherit-info,
+			.override-info,
+			.import-info
+			{
+				color: @secondary;
+			}
+
+			.permalink, .srclink {
+				color: @secondary;
+
+				&:hover {
+					color: @primary;
+
+				}
+			}
+
+			.params {
+				.opt, .or, .generic, .varargs {
+					color: @secondary;
+				}
+			}
+
+			&.highlight {
+				.subsection-header {
+					color: @highlight;
+
+					span, a, .opt, .or, .sep {
+						color: @highlight;
+					}
+				}
+
+				.permalink, .srclink {
+					color: @highlight;
+				}
+			}
+		}
+	}
+
+	strong {
+		color: @emphasized;
+	}
+
+	a {
+		color: #268bd2;
+	}
+
+	#extlink {
+		color: #268bd2;
+	}
+
+	::-webkit-scrollbar {
+		width: 12px;
+		background: #fff;
+		border-width: 1px 0 0 1px;
+		border-style: solid;
+		border-color: @section-border-color;
+	}
+
+	::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: @section-border-color;
+		width: 12px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background-color: darken(@section-border-color, 10%);
+	}
+}
