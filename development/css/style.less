@@ -155,6 +155,10 @@ html, body {
 		margin: @gutter 0;
 	}
 
+	ul ul {
+		margin: 0;
+	}
+
 	h2, h3 {
 		margin: @gutter 0;
 	}
@@ -218,6 +222,19 @@ html, body {
 			.inline-block();
 			width: 31px;
 		}
+
+		.enum-fields {
+			font-size: 118%;
+			margin: 1.33em 0;
+
+			.enum-field {
+				padding-left: @gutter;
+				font-size: 1em;
+				font-weight: 600;
+				margin: 0;
+			}
+		}
+
 
 		.inherit-info,
 		.override-info,

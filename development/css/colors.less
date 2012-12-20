@@ -66,8 +66,24 @@ body.dark {
 				background-color: lighten(@background, 3%);
 			}
 
-			.scope, .chainable, .accessor {
+			.scope, .enum, .chainable, .accessor {
 				color: fadeout(@font-color, 30%);
+			}
+
+			.enum-fields {
+				.brace, .equals {
+					color: fadeout(@font-color, 30%);
+				}
+
+				.defaultValue {
+					&.string {
+						color: #CC9393;
+					}
+
+					&.number {
+						color: #8CD0D3;
+					}
+				}
 			}
 
 			.inherit-info,
@@ -226,8 +242,24 @@ body.light {
 				background-color: #F5EFDB; //fadeout(@bg2, 50%) with @background behind
 			}
 
-			.scope, .chainable, .accessor {
+			.scope, .enum, .chainable, .accessor {
 				color: @secondary;
+			}
+
+			.enum-fields {
+				.brace, .equals {
+					color: @secondary;
+				}
+
+				.defaultValue {
+					&.string {
+						color: #2aa198;
+					}
+
+					&.number {
+						color: #2aa198;
+					}
+				}
 			}
 
 			.inherit-info,
