@@ -11,6 +11,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
+		<!-- build:css css/built.css -->
 		<link rel="stylesheet" type="text/css" href="css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
 		<link rel="stylesheet/less" type="text/css" href="css/code-dark.less">
@@ -18,14 +19,18 @@
 		<link rel="stylesheet/less" type="text/css" href="css/style.less">
 		<link rel="stylesheet/less" type="text/css" href="css/colors.less">
 		<link rel="stylesheet" type="text/css" href="css/icomoon.css" />
+		<!-- endbuild -->
 
-		<script type="text/javascript" src="js/less-1.3.1.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="js/require.js"></script>
-		<script type="text/javascript" src="js/boot.js"></script>
-		<script type="text/javascript">
+		<!-- build:js js/built.js -->
+		<script src="js/require.js"></script>
+		<script src="js/boot.js"></script>
+
+		<script src="js/less-1.3.1.min.js"></script>
+		<script>
 			localStorage.clear();
 			less.env = "development";
 		</script>
+		<!-- endbuild -->
 	</head>
 	<body class="dark">
 		<div id="header">

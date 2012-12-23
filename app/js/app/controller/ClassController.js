@@ -149,8 +149,8 @@ define(function(require) {
 			this.$root.removeClass('initial');
 
 			if (parts.module === this._currentModule) {
-				var anchor = this.$root.find('[rel="/#' + parts.longName + '"]');
-				this.highlight('/#' + parts.longName);
+				var anchor = this.$root.find('[rel="#' + parts.longName + '"]');
+				this.highlight('#' + parts.longName);
 				this.scrollTo(anchor);
 				return;
 			}

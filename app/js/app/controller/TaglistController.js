@@ -79,13 +79,13 @@ define(function(require) {
 
 		'docload:property': function(parts) {
 			if (parts.module === this._currentModule) {
-				this.highlight('/#' + parts.longName);
+				this.highlight('#' + parts.longName);
 				return;
 			}
 
 			this._currentModule = parts.module;
 			this.load(parts.module).then(function() {
-				this.highlight('/#' + parts.longName);
+				this.highlight('#' + parts.longName);
 			}.bind(this));
 		}
 
