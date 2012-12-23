@@ -1,14 +1,13 @@
 define(function(require) {
 
 	var $ = require('jquery');
-	var declare = require('dojo/_base/declare');
 	var Controller = require('joss/mvc/Controller');
 	var hub = require('dojo/topic');
 	require('joss/geometry/DomRect');
 
 
 
-	var TaglistController = declare(Controller, {
+	var TaglistController = Controller.extend({
 
 		start: function() {
 			this._currentModule = null;

@@ -13,9 +13,9 @@ define(function(require) {
 
 	$(document).ready(function() {
 		Deferreds.parallel(
-			ClassController().setRoot('#main').start(),
-			TaglistController().setRoot('#taglist').start(),
-			MenuController().setRoot('#modules').start()
+			ClassController({root: '#main'}).start(),
+			TaglistController({root: '#taglist'}).start(),
+			MenuController({root: '#modules'}).start()
 		).then(function() {
 			//only initialize Router once content is in place,
 			//because it will send the initial pageload fragment

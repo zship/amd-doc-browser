@@ -1,12 +1,11 @@
 define(function(require) {
 
-	var declare = require('dojo/_base/declare');
 	var Router = require('joss/mvc/Router');
 	var hub = require('dojo/topic');
 
 
 
-	return declare(Router, {
+	return Router.extend({
 
 		'*': function(fragment) {
 			if (!fragment) {

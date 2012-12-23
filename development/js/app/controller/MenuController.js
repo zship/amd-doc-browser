@@ -1,13 +1,12 @@
 define(function(require) {
 
 	var $ = require('jquery');
-	var declare = require('dojo/_base/declare');
 	var Controller = require('joss/mvc/Controller');
 	require('joss/geometry/DomRect');
 
 
 
-	var MenuController = declare(Controller, {
+	var MenuController = Controller.extend({
 
 		start: function() {
 			this._currentModule = null;

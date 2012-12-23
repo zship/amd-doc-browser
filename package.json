@@ -1,0 +1,19 @@
+{
+	"name": "joss-doc-browser",
+	"version": "0.1.0",
+	"homepage": "https://github.com/zship/joss-doc-browser",
+	"author": "Zach Shipley <zach@zachshipley.com>",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/zship/joss-doc-browser.git"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"joss": "git://github.com/zship/joss.git#develop",
+		"amd-utils": "git://github.com/millermedeiros/amd-utils.git#v0.10.0",
+		"dojo": "git://github.com/dojo/dojo.git#1.8.2",
+		"deferreds": "git://github.com/zship/deferreds.js.git#develop"
+	},
+	"devDependencies": {},
+	"keywords": []
+}

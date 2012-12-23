@@ -1,7 +1,6 @@
 define(function(require) {
 
 	var $ = require('jquery');
-	var declare = require('dojo/_base/declare');
 	var Controller = require('joss/mvc/Controller');
 	var isNumber = require('amd-utils/lang/isNumber');
 	var hub = require('dojo/topic');
@@ -9,8 +8,7 @@ define(function(require) {
 	require('joss/geometry/DomRect');
 
 
-
-	var ClassController = declare(Controller, {
+	var ClassController = Controller.extend({
 
 		start: function() {
 			this._currentModule = null;
