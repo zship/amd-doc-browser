@@ -1,3 +1,5 @@
+var path = require('path');
+var fs = require('fs');
 
 module.exports = function( grunt ) {
 
@@ -13,7 +15,7 @@ module.exports = function( grunt ) {
 
 		staging: 'temp',
 
-		output: 'production',
+		output: 'dist',
 
 		mkdirs: {
 			staging: 'app'
@@ -25,15 +27,18 @@ module.exports = function( grunt ) {
 		},
 
 
-		// concat css/**/*.css files, inline @import, output a single minified css
 		css: {
 			'styles/main.css': ['styles/**/*.css']
 		},
 
 
 		rev: {
-			js: 'js/app.js'
+			js: 'temp/js/built.js',
+			css: 'temp/css/built.css',
+			html: 'temp/doc/**/*.html'
 		},
+
+		cacheRev: 'dist/js/rev.json',
 
 
 		'usemin-handler': {
@@ -43,8 +48,7 @@ module.exports = function( grunt ) {
 
 		// update references in HTML/CSS to revved files
 		usemin: {
-			html: ['temp/index.html'],
-			css: ['css/**/*.css']
+			html: ['temp/index.html']
 		},
 
 
@@ -97,8 +101,8 @@ module.exports = function( grunt ) {
 			production: {
 				files: {
 					'dist/': 'temp/index.html',
-					'dist/css/': 'temp/css/built.css',
-					'dist/js/': 'temp/js/built.js',
+					'dist/css/': 'temp/css/*.built.css',
+					'dist/js/': 'temp/js/*.built.js',
 					'dist/doc/': 'temp/doc/**',
 					'dist/font/': 'temp/font/**'
 				}
@@ -151,6 +155,48 @@ module.exports = function( grunt ) {
 
 	//grunt.registerTask('default', 'clean mkdirs concat css min rev usemin manifest');
 	//grunt.registerTask('default', 'clean mkdirs rev usemin');
-	grunt.registerTask('build', 'clean copy:temp less concat:temp/css/built.css usemin-handler dist usemin copy:production');
+	grunt.registerTask('build', 'clean copy:temp less concat:temp/css/built.css dist usemin-handler rev usemin copy:production cacheRev');
+
+	//Override some Yeoman tasks/helpers
+	
+	//'replace' assumes we're in the staging directory (grunt.file.setBase).
+	//The 'mkdirs' task performs this action in yeoman (at least one of the
+	//developers commented that this is a bad practice...).  We're not using
+	//that, so replicate that behavior here.
+	grunt.renameHelper('replace', 'yeomanReplace');
+
+	grunt.registerHelper('replace', function(content, regexp) {
+		var base = grunt.config('base') || grunt.option('base') || process.cwd();
+		grunt.file.setBase(grunt.config('staging'));
+
+		var ret = grunt.helper('yeomanReplace', content, regexp);
+
+		grunt.file.setBase(base);
+		return ret;
+	});
+
+	var revisions = {};
+
+	grunt.registerMultiTask('rev', 'Automate the hash renames of assets filename', function() {
+		var files = this.data;
+		grunt.file.expandFiles(files).forEach(function(f) {
+			var md5 = grunt.helper('md5', f),
+			renamed = [md5.slice(0, 8), path.basename(f)].join('.');
+
+			//removing the staging path from the file name
+			revisions[f.split('/').slice(1).join('/')] = path.join(path.dirname(f), renamed).split('/').slice(1).join('/');
+
+			grunt.verbose.ok().ok(md5);
+			// create the new file
+			fs.renameSync(f, path.resolve(path.dirname(f), renamed));
+			grunt.log.write(f + ' ').ok(renamed);
+		});
+	});
+
+
+	grunt.registerTask('cacheRev', 'Store hash revision filenames in a JSON structure for client-side AJAX calls to use', function() {
+		var filename = grunt.config.get(this.name);
+		grunt.file.write(filename, JSON.stringify(revisions, false, 4), 'utf-8');
+	});
 
 };

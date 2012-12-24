@@ -13,7 +13,7 @@ define(function(require) {
 			this._highlighted = null;
 
 			return $.ajax({
-				url: '/doc/menu.html',
+				url: 'doc/menu.html',
 				method: 'GET'
 			}).done(function(response) {
 				this.$root.find('.menu').html(response);

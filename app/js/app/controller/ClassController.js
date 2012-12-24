@@ -19,7 +19,7 @@ define(function(require) {
 
 		load: function(moduleName) {
 			return $.ajax({
-				url: '/doc/classes/' + moduleName + '.html',
+				url: 'doc/classes/' + moduleName + '.html',
 				method: 'GET'
 			}).done(function(response) {
 				this.contents(response);

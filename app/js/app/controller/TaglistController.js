@@ -16,7 +16,7 @@ define(function(require) {
 
 		load: function(moduleName) {
 			return $.ajax({
-				url: '/doc/taglists/' + moduleName + '.html',
+				url: 'doc/taglists/' + moduleName + '.html',
 				method: 'GET'
 			}).done(function(response) {
 				this.contents(response);
