@@ -2,6 +2,7 @@ define(function(require) {
 
 	var $ = require('jquery');
 	var Controller = require('joss/mvc/Controller');
+	var filters = require('../filters');
 	var isNumber = require('amd-utils/lang/isNumber');
 	var hub = require('dojo/topic');
 	var Url = require('dojo/_base/url');
@@ -21,9 +22,33 @@ define(function(require) {
 				url: 'doc/classes/' + moduleName + '.html',
 				method: 'GET'
 			}).done(function(response) {
-				this.contents(response);
-				hub.publish('class:load', name);
+				this.render(response);
 			}.bind(this));
+		},
+
+
+		render: function(data) {
+			if (data) {
+				this.contents(data);
+			}
+
+			if (filters.showInherited) {
+				this.$root.find('.subsection.inherited').show();
+			}
+			else {
+				this.$root.find('.subsection.inherited').hide();
+			}
+
+			this.$root.find('.subsection').removeClass('even odd');
+			this.$root.find('.section').each(function() {
+				$(this).find('.subsection:visible:even').addClass('even');
+				$(this).find('.subsection:visible:odd').addClass('odd');
+			});
+		},
+
+
+		'filters:update': function() {
+			this.render();
 		},
 
 

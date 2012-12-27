@@ -58,11 +58,11 @@ body.dark {
 		}
 
 		.subsection {
-			&:nth-child(odd) {
+			&.odd {
 				background-color: @background;
 			}
 
-			&:nth-child(even) {
+			&.even {
 				background-color: lighten(@background, 3%);
 			}
 
@@ -281,11 +281,11 @@ body.light {
 				color: @emphasized;
 			}
 
-			&:nth-child(odd) {
+			&.odd {
 				background-color: #FBF4E0; //fadeout(@bg2, 90%) with @background behind
 			}
 
-			&:nth-child(even) {
+			&.even {
 				background-color: #F5EFDB; //fadeout(@bg2, 50%) with @background behind
 			}
 

@@ -2,6 +2,7 @@ define(function(require) {
 
 	var $ = require('jquery');
 	var Controller = require('joss/mvc/Controller');
+	var filters = require('../filters');
 	var hub = require('dojo/topic');
 	require('joss/geometry/DomRect');
 
@@ -19,11 +20,29 @@ define(function(require) {
 				url: 'doc/taglists/' + moduleName + '.html',
 				method: 'GET'
 			}).done(function(response) {
-				this.contents(response);
+				this.render(response);
+			}.bind(this));
+		},
+
+
+		render: function(data) {
+			if (data) {
+				this.contents(data);
 				var moduleInfo = this.$root.find('h2:first').html();
 				$('#header h2').html(moduleInfo);
-				hub.publish('taglist:load', name);
-			}.bind(this));
+			}
+
+			if (filters.showInherited) {
+				this.$root.find('li.inherited').show();
+			}
+			else {
+				this.$root.find('li.inherited').hide();
+			}
+		},
+
+
+		'filters:update': function() {
+			this.render();
 		},
 
 
