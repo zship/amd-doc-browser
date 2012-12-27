@@ -123,6 +123,53 @@ body.dark {
 		}
 	}
 
+	#meta {
+		@bg: #fdf6e3;
+
+		&.active {
+			color: #657b83;
+		}
+
+		&.active i, &.active i:hover {
+			border-color: fadeout(@bg, 50%);
+			background-color: @bg;
+		}
+
+		i:hover {
+			border-color: @font-color;
+		}
+
+		i:active, &.active i:active {
+			color: #000;
+			background-color: fadeout(@bg, 50%);
+		}
+
+		&.active i:hover {
+			color: #000;
+		}
+
+		.bgShim {
+			background-color: @background;
+		}
+
+		.filters {
+			border-color: fadeout(@bg, 50%);
+			background-color: @bg;
+
+			.swatch {
+				border: 1px solid #000;
+
+				&:hover {
+					border-color: #268bd2;
+				}
+			}
+		}
+
+		a {
+			color: #268bd2;
+		}
+	}
+
 	strong {
 		color: fadein(@font-color, 10%);
 	}
@@ -297,6 +344,53 @@ body.light {
 					color: @highlight;
 				}
 			}
+		}
+	}
+
+	#meta {
+		@bg: #2f2f2f;
+
+		&.active {
+			color: #dcdcdc;
+		}
+
+		&.active i, &.active i:hover {
+			border-color: fadeout(@bg, 50%);
+			background-color: @bg;
+		}
+
+		i:hover {
+			border-color: @font-color;
+		}
+
+		i:active, &.active i:active {
+			color: #fff;
+			background-color: fadeout(@bg, 50%);
+		}
+
+		&.active i:hover {
+			color: #fff;
+		}
+
+		.bgShim {
+			background-color: @background;
+		}
+
+		.filters {
+			border-color: fadeout(@bg, 50%);
+			background-color: @bg;
+
+			.swatch {
+				border: 1px solid #fff;
+
+				&:hover {
+					border-color: #8cd0d3;
+				}
+			}
+		}
+
+		a {
+			color: #8cd0d3;
 		}
 	}
 

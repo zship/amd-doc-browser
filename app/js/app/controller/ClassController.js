@@ -13,7 +13,6 @@ define(function(require) {
 		start: function() {
 			this._currentModule = null;
 			this._highlighted = null;
-			console.log(this.$root.data('events'));
 		},
 
 
@@ -23,6 +22,7 @@ define(function(require) {
 				method: 'GET'
 			}).done(function(response) {
 				this.contents(response);
+				hub.publish('class:load', name);
 			}.bind(this));
 		},
 
@@ -150,6 +150,7 @@ define(function(require) {
 
 			if (parts.module === this._currentModule) {
 				var anchor = this.$root.find('[rel="#' + parts.longName + '"]');
+				//console.log(anchor);
 				this.highlight('#' + parts.longName);
 				this.scrollTo(anchor);
 				return;

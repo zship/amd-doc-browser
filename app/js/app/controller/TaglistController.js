@@ -22,6 +22,7 @@ define(function(require) {
 				this.contents(response);
 				var moduleInfo = this.$root.find('h2:first').html();
 				$('#header h2').html(moduleInfo);
+				hub.publish('taglist:load', name);
 			}.bind(this));
 		},
 

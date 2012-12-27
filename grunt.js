@@ -33,7 +33,7 @@ module.exports = function( grunt ) {
 
 
 		rev: {
-			js: 'temp/js/built.js',
+			js: 'temp/js/built.min.js',
 			css: 'temp/css/built.css',
 			html: 'temp/doc/**/*.html'
 		},
@@ -87,11 +87,6 @@ module.exports = function( grunt ) {
 		},
 
 
-		min: {
-			dist: ''
-		},
-
-
 		copy: {
 			temp: {
 				files: {
@@ -102,7 +97,7 @@ module.exports = function( grunt ) {
 				files: {
 					'dist/': 'temp/index.html',
 					'dist/css/': 'temp/css/*.built.css',
-					'dist/js/': 'temp/js/*.built.js',
+					'dist/js/': 'temp/js/*.built.min.js',
 					'dist/doc/': 'temp/doc/**',
 					'dist/font/': 'temp/font/**'
 				}
@@ -133,12 +128,19 @@ module.exports = function( grunt ) {
 		},
 
 
+		min: {
+			dist: {
+				src: ['<banner>', '<config:dist.out>'],
+				dest: 'temp/js/built.min.js'
+			}
+		},
+
+
 		requirejs: {
 			baseUrl: 'temp/js',
 			optimize: 'none',
 
 			paths: {
-				'jquery': 'jquery-1.7.2',
 				'jquery.hashchange': 'jquery.ba-hashchange',
 				'jquery.event.input': 'jquery/jquery.event.input',
 				'jquery.event.drag': 'jquery/jquery.event.drag-2.0'
@@ -155,7 +157,7 @@ module.exports = function( grunt ) {
 
 	//grunt.registerTask('default', 'clean mkdirs concat css min rev usemin manifest');
 	//grunt.registerTask('default', 'clean mkdirs rev usemin');
-	grunt.registerTask('build', 'clean copy:temp less concat:temp/css/built.css dist usemin-handler rev usemin copy:production cacheRev');
+	grunt.registerTask('build', 'clean copy:temp less concat:temp/css/built.css dist min usemin-handler rev usemin copy:production cacheRev');
 
 	//Override some Yeoman tasks/helpers
 	

@@ -383,6 +383,123 @@ html, body {
 }
 
 
+#meta {
+	@bw: 3px;
+
+	position: absolute;
+	top: 7px;
+	right: @gutter;
+
+	i {
+		position: relative;
+		z-index: 9999;
+		.inline-block();
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		padding: 10px;
+
+		font-size: 1.64em;
+
+		border-width: @bw;
+		border-style: solid;
+		border-color: transparent;
+		.border-radius(5px);
+	}
+
+	&.active i {
+		border-width: @bw @bw 0 @bw;
+		border-style: solid;
+		.border-radius-sides(5px, 0, 0, 5px);
+	}
+
+	i:hover {
+		border-width: @bw;
+		border-style: solid;
+		.border-radius(5px);
+	}
+
+	&.active i:hover {
+		border-width: @bw @bw 0 @bw;
+		border-style: solid;
+		.border-radius-sides(5px, 0, 0, 5px);
+	}
+
+	.bgShim {
+		position: absolute;
+		z-index: 9998;
+		top: -200px;
+	}
+
+	&.active .bgShim {
+		top: 40px;
+		right: 0;
+		height: @bw;
+		width: 40px + 2 * @bw;
+	}
+
+	.filters {
+		@gutter: 1.25em;
+		display: none;
+
+		position: absolute;
+		top: 40px;
+		right: 0;
+		z-index: 9997;
+
+		width: 200px;
+		padding: @gutter;
+		border-style: solid;
+		border-width: @bw;
+		.border-radius-sides(0, 5px, 5px, 5px);
+
+
+		label {
+			display: block;
+			font-weight: bold;
+			margin: @gutter 0;
+		}
+
+		label:first-child {
+			margin-top: 0;
+		}
+
+		.swatch {
+			cursor: default;
+			.inline-block();
+			width: 25px;
+			height: 25px;
+			line-height: 25px;
+			padding: 2px;
+			margin-right: 2px;
+
+			text-align: center;
+
+			&.dark {
+				color: rgba(255,255,255,0.9);
+				background: rgb(63, 63, 63);
+			}
+
+			&.light {
+				color: #657b83;
+				background: #fdf6e3;
+			}
+		}
+
+		.cite {
+			display: block;
+			font-size: 0.9em;
+		}
+	}
+
+	&.active .filters {
+		display: block;
+	}
+
+}
+
+
 
 a {
 	text-decoration: none;
