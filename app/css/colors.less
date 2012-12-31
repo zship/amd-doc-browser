@@ -58,6 +58,8 @@ body.dark {
 		}
 
 		.subsection {
+			border-color: @background;
+
 			&.odd {
 				background-color: @background;
 			}
@@ -271,22 +273,25 @@ body.light {
 			.section-header {
 				color: @emphasized;
 				text-shadow: 1px 1px 0 #fff;
-				background: @bg2;
+				background-color: @bg2;
+				background-color: fadeout(@bg2, 50%);
 				border-color: #fff;
 			}
 		}
 
 		.subsection {
+			border-color: #fff;
+
 			.subsection-header {
 				color: @emphasized;
 			}
 
 			&.odd {
-				background-color: #FBF4E0; //fadeout(@bg2, 90%) with @background behind
+				background-color: lighten(@background, 1%);
 			}
 
 			&.even {
-				background-color: #F5EFDB; //fadeout(@bg2, 50%) with @background behind
+				background-color: #FBF4E0; //fadeout(@bg2, 90%) with @background behind
 			}
 
 			.scope, .enum, .chainable, .accessor {

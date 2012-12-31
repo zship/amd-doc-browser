@@ -20,7 +20,7 @@ html, body {
 	width: 100%;
 }
 
-@modules-width: 160px;
+@modules-width: 150px;
 @modules-outer-width: @modules-width + @gutter * 2 + @section-border-size;
 #modules {
 	position: absolute;
@@ -41,7 +41,7 @@ html, body {
 
 	.menu {
 		position: relative;
-		top: @header-outer-height;
+		top: @header-outer-height + 10px;
 	}
 
 	ul {
@@ -199,7 +199,7 @@ html, body {
 			margin-bottom: 0;
 			margin-left: -1 * @gutter;
 			margin-right: -1 * @gutter;
-			border-width: 1px 0;
+			border-width: 0 0 1px 0;
 			border-style: solid;
 			padding: @gutter;
 		}
@@ -212,10 +212,9 @@ html, body {
 
 		position: relative;
 		margin: 0 (-1 * @gutter);
-		padding: 1px @gutter - 5px;
+		padding: 1px @gutter;
 		padding-right: @inherit-info-width + @gutter * 2;
-		border-width: 0 5px;
-		border-color: transparent;
+		border-width: 0 0 1px 0;
 		border-style: solid;
 
 		.accessor {
