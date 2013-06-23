@@ -79,3 +79,7 @@
 	@width: @squared * (1 + (2 * @phi) * (@lineheight - @phi));
 	width: round(@width);
 }
+
+.cpl(@size, @mu: 2.25, @cpl: 70) {
+	max-width: @cpl * (@size / @mu);
+}

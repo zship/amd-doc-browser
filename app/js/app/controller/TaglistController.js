@@ -53,7 +53,7 @@ define(function(require) {
 				return;
 			}
 
-			var anchor = this.$root.find('[href="' + member + '"]');
+			var anchor = this.$root.find('[rel="' + member + '"]');
 			anchor.parent().addClass('highlight');
 		},
 
@@ -79,7 +79,7 @@ define(function(require) {
 
 
 		'a mouseenter': function(ev, tgt) {
-			var member = $(tgt).attr('href');
+			var member = $(tgt).attr('rel');
 			hub.publish('section:highlight', member, this);
 		},
 

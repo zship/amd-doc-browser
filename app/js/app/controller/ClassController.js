@@ -53,7 +53,8 @@ define(function(require) {
 
 
 		'a mouseenter': function(ev, tgt) {
-			if ($(tgt).is('.srclink')) {
+			var $tgt = $(tgt);
+			if ($tgt.is('.srclink')) {
 				return false;
 			}
 
@@ -62,12 +63,12 @@ define(function(require) {
 				return false;
 			}
 
-			var tgtRect = $(tgt).rect();
+			var tgtRect = $tgt.rect();
 			var rect = $('#extlink')
 				.show()
 				.css({
-					'font-size': $(tgt).css('font-size'),
-					'background-color': $(tgt).closest('.subsection').css('background-color')
+					'font-size': $tgt.css('font-size'),
+					'background-color': $tgt.closest('.subsection').css('background-color')
 				})
 				.rect()
 				.position({
@@ -76,7 +77,25 @@ define(function(require) {
 					of: tgtRect
 				});
 
-			if ($(tgt).parent().parent().is('.inherit-info, .override-info, .import-info')) {
+			// targets spanning more than one line
+			var lineHeight = parseInt($tgt.css('line-height'), 10);
+			if (tgtRect.height > lineHeight * 1.5) {
+				var lines = Math.ceil(tgtRect.height / lineHeight);
+				lineHeight = tgtRect.height / lines;
+				var currLine = Math.ceil((ev.pageY - tgtRect.top) / lineHeight);
+				currLine = Math.max(1, currLine);
+				currLine = Math.min(lines, currLine);
+				rect.translate(0, Math.floor(currLine * lineHeight));
+
+				if (ev.pageX < rect.center.x) {
+					rect.moveRight(tgtRect.left - 3);
+				}
+				else {
+					rect.moveLeft(tgtRect.right + 3);
+				}
+			}
+
+			if ($tgt.parent().parent().is('.inherit-info, .override-info, .import-info')) {
 				rect.moveLeft(tgtRect.left);
 			}
 
@@ -174,9 +193,9 @@ define(function(require) {
 			this.$root.removeClass('initial');
 
 			if (parts.module === this._currentModule) {
-				var anchor = this.$root.find('[rel="#' + parts.longName + '"]');
+				var anchor = this.$root.find('[rel="' + parts.longName + '"]');
 				//console.log(anchor);
-				this.highlight('#' + parts.longName);
+				this.highlight(parts.longName);
 				this.scrollTo(anchor);
 				return;
 			}

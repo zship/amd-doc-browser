@@ -2,7 +2,7 @@
 @import "typography.less";
 @import "golden-ratio-typography.less";
 
-@gutter: 25px;
+@gutter: 30px;
 
 /*@r1: ~"(-webkit-min-device-pixel-ratio: 1), (min-resolution: 96dpi)";*/
 /*@r15: ~"(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)";*/
@@ -150,17 +150,8 @@ html, body {
 	overflow: auto;
 
 
-	p, ul {
-		.golden-auto(@font-size, @mu-open-sans, 70);
-		margin: @gutter 0;
-	}
-
 	ul ul {
 		margin: 0;
-	}
-
-	h2, h3 {
-		margin: @gutter 0;
 	}
 
 	code {
@@ -172,9 +163,6 @@ html, body {
 	}
 
 	pre {
-		width: round(80 * (@font-size / @mu-inconsolata));
-		padding: @gutter;
-		margin: @gutter 0;
 		.border-radius(3px);
 		border-width: 1px;
 		border-style: solid;
@@ -206,14 +194,36 @@ html, body {
 	}
 
 
+	.overview .subsection .description > :first-child {
+		margin-top: 0;
+	}
+
+
+	.dependencies .requires,
+	.dependencies .requiredby
+	{
+		display: inline-block;
+		vertical-align: top;
+		min-width: 300px;
+		margin-right: @gutter;
+
+		h3 {
+			margin-top: 0;
+		}
+	}
+
+
 	.subsection
 	{
 		@inherit-info-width: 160px;
 
+		.subsection-header {
+			padding-right: @inherit-info-width + @gutter * 2;
+		}
+
 		position: relative;
 		margin: 0 (-1 * @gutter);
-		padding: 1px @gutter;
-		padding-right: @inherit-info-width + @gutter * 2;
+		padding: @gutter;
 		border-width: 0 0 1px 0;
 		border-style: solid;
 
@@ -228,12 +238,19 @@ html, body {
 
 			.enum-field {
 				padding-left: @gutter;
-				font-size: 1em;
 				font-weight: 600;
 				margin: 0;
 			}
 		}
 
+		& > :first-child {
+			margin-top: 0;
+		}
+
+		& > :last-child,
+		.description > :last-child {
+			margin-bottom: 0;
+		}
 
 		.inherit-info,
 		.override-info,
@@ -290,7 +307,7 @@ html, body {
 		.meta {
 			position: absolute;
 			z-index: 10;
-			top: 20px;
+			top: @gutter;
 			right: @gutter;
 
 			.permalink, .srclink {
@@ -321,6 +338,11 @@ html, body {
 			}
 		}
 
+	}
+
+
+	.subsection-header .colon {
+		padding: 0 5px;
 	}
 
 

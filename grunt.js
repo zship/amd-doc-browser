@@ -161,10 +161,10 @@ module.exports = function( grunt ) {
 
 	//Override some Yeoman tasks/helpers
 	
-	//'replace' assumes we're in the staging directory (grunt.file.setBase).
-	//The 'mkdirs' task performs this action in yeoman (at least one of the
-	//developers commented that this is a bad practice...).  We're not using
-	//that, so replicate that behavior here.
+	//'replace' assumes we're in the staging directory. The 'mkdirs' task does
+	//grunt.file.setBase(<staging>) in yeoman (at least one of the developers
+	//commented that this is a bad practice...).  We're not using mkdirs, so
+	//mimick that awful stateful behavior here.
 	grunt.renameHelper('replace', 'yeomanReplace');
 
 	grunt.registerHelper('replace', function(content, regexp) {

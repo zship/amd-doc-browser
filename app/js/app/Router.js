@@ -4,7 +4,6 @@ define(function(require) {
 	var hub = require('dojo/topic');
 
 
-
 	return Router.extend({
 
 		'*': function(fragment) {
@@ -19,7 +18,7 @@ define(function(require) {
 				var matches;
 				if ((matches = fragment.match(/^\/(.*?)[#~\.](.*)$/)) !== null) {
 					hub.publish('docload:property', {
-						longName: matches[0],
+						longName: matches[0].replace(/^\//, ''),
 						module: matches[1],
 						member: matches[2]
 					});

@@ -1,9 +1,85 @@
+@base: 12;
+
+@zeta:    14 / @base;
+@epsilon: 16 / @base;
+@delta:   18 / @base;
+@gamma:   21 / @base;
+@beta:    24 / @base;
+@alpha:   36 / @base;
+
+
+.base {
+	font-size: 1rem;
+}
+
+.alpha {
+	font-size: @alpha * 1rem;
+}
+
+.beta {
+	font-size: @beta * 1rem;
+}
+
+.gamma {
+	font-size: @gamma * 1rem;
+}
+
+.delta {
+	font-size: @delta * 1rem;
+}
+
+.epsilon {
+	font-size: @epsilon * 1rem;
+}
+
+.zeta {
+	font-size: @zeta * 1rem;
+}
+
+
+
+@font-size: 14px;
+
+@size: @font-size;
+@cpl: 70;
+@mu: @mu-open-sans;
+@tracking: 0;
+@letter-spacing-em: @tracking / 1000em;
+@width: @cpl * (@size / @mu);
+@adjusted-mu: (@cpl * (@size + @size * @letter-spacing-em)) / (@width + (@width * @letter-spacing-em));
+@adjusted-width: @cpl * ((@size + (@size * @letter-spacing-em)) / @adjusted-mu);
+
+@squared: (@size * @phi) * (@size * @phi);
+@line-height: unit(@phi - (1 / (2 * @phi)) * (1 - @adjusted-width / (@squared)));
+
+
+//element's line-height + padding-top + padding-bottom = main line-height * @val
+//http://lamb.cc/typograph/
+.rhythm(@val, @el-font-size: 1rem) {
+	@total: @val * @line-height;
+	@computed-line-height: unit(@el-font-size) * @line-height;
+	@pad: unit(@total - @computed-line-height);
+	@nudge: 0.55;
+	/*
+	 *padding-top: @pad * 1rem;
+	 *padding-bottom: @pad * 1rem;
+	 */
+	margin-top: @nudge * @pad * 1rem;
+	margin-bottom: (1 - @nudge) * @pad * 1rem;
+	/*
+	 *margin-top: 0;
+	 *margin-bottom: 0;
+	 */
+}
+
+
 html, body {
 	font-family: "Open Sans", "Helvetica", sans-serif;
 	font-size: 14px;
 	font-weight: normal;
-	line-height: 1.6;
+	line-height: @line-height;
 }
+
 
 code, pre {
 	font-family: "Consolas", "Inconsolata", monospace;
@@ -19,24 +95,73 @@ ul {
 	list-style-type: circle;
 }
 
+h1 {
+	.beta;
+	.rhythm(4.5, @epsilon);
+}
+
+h2 {
+	.gamma;
+	.rhythm(4, @epsilon);
+}
+
+h3 {
+	.delta;
+	.rhythm(3.5, @epsilon);
+}
+
+h4 {
+	.epsilon;
+	.rhythm(3, @epsilon);
+}
+
+h5 {
+	.zeta;
+	.rhythm(2.5, @epsilon);
+}
+
+h6 {
+	.base;
+	.rhythm(2, @epsilon);
+}
+
 h1, h2 {
 	font-weight: 600;
 }
 
-h1 {
-	font-size: 218%;
-}
-
-h2 {
-	font-size: 164%;
-}
-
 h3 {
-	font-size: 145%;
 	font-weight: 600;
 }
 
 h4 {
-	font-size: 118%;
 	font-weight: 600;
+}
+
+.subsection {
+	h2 {
+		.epsilon;
+		.rhythm(4, @epsilon);
+	}
+
+	h3 {
+		.zeta;
+		.rhythm(3.5, @zeta);
+	}
+
+	h4 {
+		.base;
+		.rhythm(3);
+	}
+
+	p, ul {
+		.rhythm(2);
+		max-width: @width;
+		/*.golden-width(@font-size, @line-height)*/
+	}
+
+	pre {
+		width: round(80 * (@font-size / @mu-inconsolata));
+		padding: @gutter;
+		.rhythm(2);
+	}
 }

@@ -60,6 +60,12 @@ body.dark {
 		.subsection {
 			border-color: @background;
 
+			.subsection-header {
+				.string {
+					color: #CC9393;
+				}
+			}
+
 			&.odd {
 				background-color: @background;
 			}
@@ -68,7 +74,7 @@ body.dark {
 				background-color: lighten(@background, 3%);
 			}
 
-			.scope, .enum, .chainable, .accessor {
+			.qualifier {
 				color: fadeout(@font-color, 30%);
 			}
 
@@ -276,6 +282,10 @@ body.light {
 				background-color: @bg2;
 				background-color: fadeout(@bg2, 50%);
 				border-color: #fff;
+
+				&.highlight {
+					color: @highlight;
+				}
 			}
 		}
 
@@ -284,6 +294,10 @@ body.light {
 
 			.subsection-header {
 				color: @emphasized;
+
+				.string {
+					color: #2aa198;
+				}
 			}
 
 			&.odd {
@@ -294,7 +308,7 @@ body.light {
 				background-color: #FBF4E0; //fadeout(@bg2, 90%) with @background behind
 			}
 
-			.scope, .enum, .chainable, .accessor {
+			.qualifier {
 				color: @secondary;
 			}
 
