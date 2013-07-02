@@ -41,7 +41,7 @@ html, body {
 
 	.menu {
 		position: relative;
-		top: @header-outer-height + 10px;
+		top: @header-height + 10px;
 	}
 
 	ul {
@@ -69,18 +69,19 @@ html, body {
 }
 
 
-@header-outer-height: 60px;
-@header-height: @header-outer-height - (10px * 2);
+@header-height: 85px;
 #header {
 	position: absolute;
 	top: 0;
 	left: @modules-outer-width;
 	right: 0;
 	height: @header-height;
-	padding: 10px 0 10px @gutter;
+	padding: @gutter;
+	box-sizing: border-box;
 
 	h2 {
 		margin: 0;
+		line-height: 1;
 	}
 
 	.extends {
@@ -97,17 +98,19 @@ html, body {
 @taglist-outer-width: @taglist-width + @gutter * 2;
 #taglist {
 	position: absolute;
-	top: @header-outer-height;
+	top: @header-height;
 	left: @modules-outer-width;
 	bottom: 0;
 	width: @taglist-width;
 	padding: @gutter;
-	padding-top: 0;
-
 	overflow: auto;
 
 	& > h2 {
 		display: none;
+	}
+
+	div:first-of-type > h3 {
+		margin-top: 0;
 	}
 
 	ul {
@@ -131,7 +134,7 @@ html, body {
 
 #main {
 	position: absolute;
-	top: @header-outer-height;
+	top: @header-height;
 	left: @modules-outer-width + @taglist-outer-width;
 	right: 0;
 	bottom: 0;
@@ -190,6 +193,7 @@ html, body {
 			border-width: 0 0 1px 0;
 			border-style: solid;
 			padding: @gutter;
+			line-height: 1;
 		}
 	}
 
@@ -259,15 +263,18 @@ html, body {
 			position: absolute;
 			z-index: 9;
 			/*top: 75px;*/
-			top: 1px;
+			top: @gutter;
 			right: @gutter;
 
 			.inner {
-				margin: @gutter 0;
-				max-width: @inherit-info-width;
+				.rhythm(2);
 				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
+
+				@media only screen and (max-width: 1400px) {
+					overflow: hidden;
+					text-overflow: ellipsis;
+					max-width: @inherit-info-width;
+				}
 			}
 
 			//mirror the dimensions of adjacent h4 and description, to
@@ -277,12 +284,13 @@ html, body {
 			}
 
 			&::before {
+				.epsilon;
+				.rhythm(4, @epsilon);
 				visibility: hidden;
 				content: 'align';
 				display: block;
-				font-size: 118%;
 				font-weight: 600;
-				margin-top: 1.33em;
+				margin-top: 0;
 			}
 		}
 
@@ -418,7 +426,7 @@ html, body {
 	@bw: 3px;
 
 	position: absolute;
-	top: 7px;
+	top: 19px;
 	right: @gutter;
 
 	i {
